@@ -1,10 +1,12 @@
 import React, {FC} from 'react';
 import {SafeAreaView} from 'react-native';
-import {ThemeProvider} from './src';
+import {Map, ThemeProvider} from './src';
 
 const App: FC = () => (
   <ThemeProvider>
-    <SafeAreaView />
+    <SafeAreaView>
+      <Map />
+    </SafeAreaView>
   </ThemeProvider>
 );
 
