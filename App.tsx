@@ -1,6 +1,6 @@
 import React, {FC} from 'react';
 import {SafeAreaView} from 'react-native';
-import {ThemeProvider} from './src/theme/ThemeProvider.tsx';
+import {ThemeProvider} from './src';
 
 const App: FC = () => (
   <ThemeProvider>
