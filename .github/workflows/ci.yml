@@ -1,0 +1,26 @@
+name: CI Build
+on:
+  push:
+    branches:
+      - main
+jobs:
+  ci_build:
+    name: Build and Unit Tests
+    runs-on: ubuntu-22.04
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '18'
+          cache: 'yarn'
+
+      - name: Install Dependencies
+        run: yarn
+
+      - name: Lint
+        run: yarn lint
+
+      - name: Unit Tests
+        run: yarn test
