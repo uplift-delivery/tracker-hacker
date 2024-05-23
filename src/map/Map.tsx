@@ -3,6 +3,7 @@ import MapView, {PROVIDER_GOOGLE} from 'react-native-maps';
 import {mapStyle} from './map-style.ts';
 import {styled} from 'tamagui';
 import {MapViewRoute} from 'react-native-maps-routes';
+import {ConfigKey, getConfigOrDefault} from '../config';
 
 const someFedExLocation = {
   latitude: 41.574954467659246,
@@ -31,7 +32,7 @@ export const Map: FC = () => (
     <MapViewRoute
       origin={someFedExLocation}
       destination={uplift}
-      apiKey="<API KEY>"
+      apiKey={getConfigOrDefault(ConfigKey.MAP_API_KEY)}
       strokeColor="red"
     />
   </StyledMap>

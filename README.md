@@ -5,8 +5,14 @@ This is a new [**React Native**](https://reactnative.dev) project, bootstrapped 
 ## Requirements:
 - Node 18
 - Xcode >= 14.3
+- https://reactnative.dev/docs/set-up-your-environment
 
->**Note**: Make sure you have completed the [React Native - Environment Setup](https://reactnative.dev/docs/environment-setup) instructions till "Creating a new application" step, before proceeding.
+## Config
+We're using [react-native-config](https://github.com/lugg/react-native-config).
+
+1. Create a .env file at the root of the app
+2. Get the map api key from the [developer console credentials section](https://console.cloud.google.com/google/maps-apis/credentials?authuser=1&project=tracker-hacker-424116)
+3. Add `MAP_API_KEY=<API KEY>` to .env file
 
 ## Step 1: Start the Metro Server
 
