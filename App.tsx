@@ -1,12 +1,14 @@
 import React, {FC} from 'react';
-import {SafeAreaView} from 'react-native';
-import {Map, ThemeProvider} from './src';
+import {Navigator, ShipmentContextProvider, ThemeProvider} from './src';
+import {NavigationContainer} from '@react-navigation/native';
 
 const App: FC = () => (
   <ThemeProvider>
-    <SafeAreaView>
-      <Map />
-    </SafeAreaView>
+    <ShipmentContextProvider>
+      <NavigationContainer>
+        <Navigator />
+      </NavigationContainer>
+    </ShipmentContextProvider>
   </ThemeProvider>
 );
 

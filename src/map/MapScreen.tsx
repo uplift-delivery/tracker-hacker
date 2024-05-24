@@ -4,23 +4,14 @@ import {mapStyle} from './map-style.ts';
 import {styled} from 'tamagui';
 import {MapViewRoute} from 'react-native-maps-routes';
 import {ConfigKey, getConfigOrDefault} from '../config';
-
-const someFedExLocation = {
-  latitude: 41.574954467659246,
-  longitude: -93.62492891722157,
-};
-
-const uplift = {
-  latitude: 41.58394249647359,
-  longitude: -93.63353541907415,
-};
+import {someFedExLocation, uplift} from '../data';
 
 const StyledMap = styled(MapView, {
   width: '100%',
   height: '100%',
 });
 
-export const Map: FC = () => (
+export const MapScreen: FC = () => (
   <StyledMap
     provider={PROVIDER_GOOGLE}
     initialRegion={{

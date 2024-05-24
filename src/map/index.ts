@@ -1,1 +1,1 @@
-export {Map} from './Map';
+export {MapScreen} from './MapScreen.tsx';
