@@ -1,5 +1,5 @@
 import React, {FC, PropsWithChildren} from 'react';
-import {TamaguiProvider, createTamagui} from 'tamagui';
+import {createTamagui, TamaguiProvider, Theme} from 'tamagui';
 import {config} from '@tamagui/config/v3';
 
 const tamaguiConfig = createTamagui(config);
@@ -10,5 +10,7 @@ declare module '@tamagui/core' {
 }
 
 export const ThemeProvider: FC<PropsWithChildren> = ({children}) => (
-  <TamaguiProvider config={tamaguiConfig}>{children}</TamaguiProvider>
+  <TamaguiProvider config={tamaguiConfig}>
+    <Theme name="light">{children}</Theme>
+  </TamaguiProvider>
 );

@@ -6,5 +6,14 @@ export interface Shipment {
   trackingNumber: string;
   weight: number;
   location: LatLng;
-  estimatedDelivery: DateTime;
+  deliveryDate: DateTime;
+  status: ShipmentStatus;
+  sender: string;
+}
+
+export enum ShipmentStatus {
+  NOT_SHIPPED = 'Not Shipped',
+  IN_TRANSIT = 'In Transit',
+  OUT_FOR_DELIVERY = 'Out For Delivery',
+  DELIVERED = 'Delivered',
 }

@@ -1,6 +1,6 @@
-import {Shipment} from './Shipment.ts';
+import {Shipment, ShipmentStatus} from './Shipment.ts';
 import {DateTime} from 'luxon';
-import {someFedExLocation} from './locations.ts';
+import {someFedExLocation, uplift} from './locations.ts';
 
 export const shipmentData: Shipment[] = [
   {
@@ -8,7 +8,9 @@ export const shipmentData: Shipment[] = [
     trackingNumber: 'a123a123',
     weight: 10,
     location: someFedExLocation,
-    estimatedDelivery: DateTime.utc().endOf('day'),
+    deliveryDate: DateTime.utc().endOf('day'),
+    status: ShipmentStatus.OUT_FOR_DELIVERY,
+    sender: 'Walgreens',
   },
   {
     id: '456',
@@ -18,6 +20,17 @@ export const shipmentData: Shipment[] = [
       latitude: 41.86467002155117,
       longitude: -87.79921520186859,
     },
-    estimatedDelivery: DateTime.utc().plus({day: 2}),
+    deliveryDate: DateTime.utc().plus({day: 2}),
+    status: ShipmentStatus.IN_TRANSIT,
+    sender: 'Etsy',
+  },
+  {
+    id: '789',
+    trackingNumber: 'c789c789',
+    weight: 10,
+    location: uplift,
+    deliveryDate: DateTime.utc().minus({day: 1}),
+    status: ShipmentStatus.DELIVERED,
+    sender: 'Online Vendor',
   },
 ];

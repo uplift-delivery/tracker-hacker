@@ -1,1 +1,1 @@
-export {Navigator} from './Navigator.tsx';
+export * from './Navigator.tsx';

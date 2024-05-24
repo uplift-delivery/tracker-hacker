@@ -1,10 +1,14 @@
 import React from 'react';
 import {HomeScreen} from './HomeScreen.tsx';
-import {ShipmentContext, someFedExLocation} from '../data';
-import {Shipment} from '../data/Shipment.ts';
-import {render, screen} from '@testing-library/react-native';
+import {
+  Shipment,
+  ShipmentContext,
+  ShipmentStatus,
+  someFedExLocation,
+} from '../data';
+import {screen} from '@testing-library/react-native';
 import {DateTime} from 'luxon';
-import {ThemeProvider} from '../theme';
+import {renderWithTheme} from '../utils';
 
 describe('HomeScreen', () => {
   test('renders all packages in list', () => {
@@ -13,22 +17,22 @@ describe('HomeScreen', () => {
       trackingNumber: 'a123a123',
       weight: 0,
       location: someFedExLocation,
-      estimatedDelivery: DateTime.utc().plus({day: 3}),
+      deliveryDate: DateTime.utc().plus({day: 3}),
+      status: ShipmentStatus.IN_TRANSIT,
+      sender: 'Grandma',
     };
 
     setupTest([item, {...item, id: '456'}, {...item, id: '789'}]);
 
-    const packages = screen.getAllByLabelText('package');
+    const packages = screen.getAllByLabelText('shipment');
     expect(packages.length).toBe(3);
   });
 
   const setupTest = (packages: Shipment[]) =>
-    render(
-      <ThemeProvider>
-        <ShipmentContext.Provider
-          value={{shipments: packages, setShipments: jest.fn()}}>
-          <HomeScreen />
-        </ShipmentContext.Provider>
-      </ThemeProvider>,
+    renderWithTheme(
+      <ShipmentContext.Provider
+        value={{shipments: packages, setShipments: jest.fn()}}>
+        <HomeScreen />
+      </ShipmentContext.Provider>,
     );
 });
