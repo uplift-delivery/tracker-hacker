@@ -1,7 +1,7 @@
 import React from 'react';
 import {renderWithNavigator} from '../utils';
 import {ShipmentListItem} from './ShipmentListItem.tsx';
-import {Shipment, ShipmentStatus, uplift} from '../data';
+import {Shipment, ShipmentStatus, someFedExLocation, uplift} from '../data';
 import {DateTime} from 'luxon';
 import {fireEvent, screen} from '@testing-library/react-native';
 
@@ -14,6 +14,8 @@ describe('ShipmentListItem', () => {
       trackingNumber: 'a123a123',
       weight: 2,
       location: uplift,
+      origin: someFedExLocation,
+      destination: uplift,
       deliveryDate: DateTime.utc(2024, 5, 3),
       status: ShipmentStatus.DELIVERED,
       sender: 'Grandma',

@@ -6,6 +6,8 @@ export interface Shipment {
   trackingNumber: string;
   weight: number;
   location: LatLng;
+  origin: LatLng;
+  destination: LatLng;
   deliveryDate: DateTime;
   status: ShipmentStatus;
   sender: string;

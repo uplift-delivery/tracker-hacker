@@ -13,7 +13,7 @@ export enum Routes {
   Map = 'Map',
 }
 
-type RootStackParamList = {
+export type RootStackParamList = {
   [Routes.Home]: undefined;
   [Routes.Map]: {shipmentId: string};
 };

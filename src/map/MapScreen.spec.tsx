@@ -4,6 +4,14 @@ import {MapScreen} from './MapScreen.tsx';
 import {fireEvent, screen} from '@testing-library/react-native';
 import {InitialState} from '@react-navigation/routers';
 import {Routes} from '../navigation';
+import {
+  Shipment,
+  ShipmentContext,
+  ShipmentStatus,
+  someFedExLocation,
+  uplift,
+} from '../data';
+import {DateTime} from 'luxon';
 
 describe('MapsScreen', () => {
   test('navigate back', () => {
@@ -17,11 +25,32 @@ describe('MapsScreen', () => {
   });
 
   const setupTest = () => {
-    const history: InitialState = {
-      index: 1,
-      routes: Object.values(Routes).map(route => ({name: route})),
+    const shipment: Shipment = {
+      id: '',
+      weight: 4,
+      trackingNumber: 'a123a123',
+      location: someFedExLocation,
+      origin: someFedExLocation,
+      destination: uplift,
+      deliveryDate: DateTime.utc().plus({day: 2}),
+      status: ShipmentStatus.IN_TRANSIT,
+      sender: 'Grandma',
     };
 
-    return renderWithNavigator(<MapScreen />, history);
+    const history: InitialState = {
+      index: 1,
+      routes: [
+        {name: Routes.Home},
+        {name: Routes.Map, params: {shipmentId: shipment.id}},
+      ],
+    };
+
+    return renderWithNavigator(
+      <ShipmentContext.Provider
+        value={{shipments: [shipment], setShipments: jest.fn()}}>
+        <MapScreen />
+      </ShipmentContext.Provider>,
+      history,
+    );
   };
 });
