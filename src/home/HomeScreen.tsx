@@ -7,7 +7,7 @@ export const HomeScreen: FC = () => {
   const {shipments} = useContext(ShipmentContext);
 
   return (
-    <Layout>
+    <Layout aria-label="Home Screen">
       <Header>Your Shipments</Header>
       <ShipmentList shipments={shipments} />
     </Layout>

@@ -1,4 +1,4 @@
-import React, {FC} from 'react';
+import React, {FC, JSX} from 'react';
 import {
   createNativeStackNavigator,
   NativeStackNavigationProp,
@@ -22,7 +22,13 @@ export type NavigationProps = NativeStackNavigationProp<RootStackParamList>;
 
 export const Navigator: FC = () => (
   <Stack.Navigator screenOptions={{headerShown: false}}>
+    {Screens()}
+  </Stack.Navigator>
+);
+
+export const Screens = (): JSX.Element => (
+  <>
     <Stack.Screen name={Routes.Home} component={HomeScreen} />
     <Stack.Screen name={Routes.Map} component={MapScreen} />
-  </Stack.Navigator>
+  </>
 );

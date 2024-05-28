@@ -8,7 +8,7 @@ import {
 } from '../data';
 import {screen} from '@testing-library/react-native';
 import {DateTime} from 'luxon';
-import {renderWithTheme} from '../utils';
+import {renderWithNavigator} from '../utils';
 
 describe('HomeScreen', () => {
   test('renders all packages in list', () => {
@@ -29,7 +29,7 @@ describe('HomeScreen', () => {
   });
 
   const setupTest = (packages: Shipment[]) =>
-    renderWithTheme(
+    renderWithNavigator(
       <ShipmentContext.Provider
         value={{shipments: packages, setShipments: jest.fn()}}>
         <HomeScreen />

@@ -1,1 +1,1 @@
-export * from './render-with-theme.tsx';
+export * from './render-test-component-utils.tsx';

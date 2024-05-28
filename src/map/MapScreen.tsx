@@ -1,18 +1,19 @@
 import React, {FC} from 'react';
 import MapView, {PROVIDER_GOOGLE} from 'react-native-maps';
 import {mapStyle} from './map-style.ts';
-import {styled, View} from 'tamagui';
+import {styled} from 'tamagui';
 import {MapViewRoute} from 'react-native-maps-routes';
 import {ConfigKey, getConfigOrDefault} from '../config';
 import {someFedExLocation, uplift} from '../data';
 import {FloatingBackButton} from './FloatingBackButton.tsx';
+import {FullscreenLayout} from '../layout';
 
 const StyledMap = styled(MapView, {
   flex: 1,
 });
 
 export const MapScreen: FC = () => (
-  <View flex={1}>
+  <FullscreenLayout aria-label="Map Screen">
     <FloatingBackButton />
 
     <StyledMap
@@ -30,5 +31,5 @@ export const MapScreen: FC = () => (
         strokeColor="red"
       />
     </StyledMap>
-  </View>
+  </FullscreenLayout>
 );

@@ -1,19 +1,9 @@
 import React from 'react';
-import {renderWithTheme} from '../utils';
+import {renderWithNavigator} from '../utils';
 import {MapScreen} from './MapScreen.tsx';
 import {fireEvent, screen} from '@testing-library/react-native';
-
-const mockedGoBack = jest.fn();
-
-jest.mock('@react-navigation/native', () => {
-  const actualNav = jest.requireActual('@react-navigation/native');
-  return {
-    ...actualNav,
-    useNavigation: () => ({
-      goBack: mockedGoBack,
-    }),
-  };
-});
+import {InitialState} from '@react-navigation/routers';
+import {Routes} from '../navigation';
 
 describe('MapsScreen', () => {
   test('navigate back', () => {
@@ -22,8 +12,16 @@ describe('MapsScreen', () => {
     const backButton = screen.getByLabelText('navigate back');
     fireEvent.press(backButton);
 
-    expect(mockedGoBack).toHaveBeenCalledTimes(1);
+    const homeScreen = screen.queryByLabelText('Home Screen');
+    expect(homeScreen).toBeVisible();
   });
 
-  const setupTest = () => renderWithTheme(<MapScreen />);
+  const setupTest = () => {
+    const history: InitialState = {
+      index: 1,
+      routes: Object.values(Routes).map(route => ({name: route})),
+    };
+
+    return renderWithNavigator(<MapScreen />, history);
+  };
 });
