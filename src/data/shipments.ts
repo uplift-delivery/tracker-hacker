@@ -1,6 +1,10 @@
 import {Shipment, ShipmentStatus} from './Shipment.ts';
 import {DateTime} from 'luxon';
 import {someFedExLocation, uplift} from './locations.ts';
+import {
+  chicagoToDesMoines,
+  desMoinesToDesMoines,
+} from './drivingCoordinates.ts';
 
 export const shipmentData: Shipment[] = [
   {
@@ -13,6 +17,7 @@ export const shipmentData: Shipment[] = [
     },
     origin: someFedExLocation,
     destination: uplift,
+    coordinates: desMoinesToDesMoines,
     deliveryDate: DateTime.utc().endOf('day'),
     status: ShipmentStatus.OUT_FOR_DELIVERY,
     sender: 'Walgreens',
@@ -32,6 +37,7 @@ export const shipmentData: Shipment[] = [
     destination: uplift,
     deliveryDate: DateTime.utc().plus({day: 2}),
     status: ShipmentStatus.IN_TRANSIT,
+    coordinates: chicagoToDesMoines,
     sender: 'Etsy',
   },
   {
@@ -43,6 +49,7 @@ export const shipmentData: Shipment[] = [
     destination: uplift,
     deliveryDate: DateTime.utc().minus({day: 1}),
     status: ShipmentStatus.DELIVERED,
+    coordinates: [uplift],
     sender: 'Online Vendor',
   },
 ];

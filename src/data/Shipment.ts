@@ -10,6 +10,7 @@ export interface Shipment {
   destination: LatLng;
   deliveryDate: DateTime;
   status: ShipmentStatus;
+  coordinates: LatLng[];
   sender: string;
 }
 
