@@ -19,8 +19,6 @@ const StyledMap = styled(MapView, {
 });
 
 export const Map: FC<{shipment: Shipment}> = ({shipment}) => {
-  const {updateShipmentLocation} = useContext(ShipmentContext);
-  const [coordinateIndex, setCoordinateIndex] = useState(0);
   const mapRef = useRef<MapView>(null);
 
   const setZoomLevel = useCallback(() => {
@@ -39,39 +37,6 @@ export const Map: FC<{shipment: Shipment}> = ({shipment}) => {
     );
   }, [shipment.destination, shipment.location]);
 
-  const resetTruck = useCallback(() => {
-    setCoordinateIndex(0);
-    updateShipmentLocation(shipment.id, shipment.coordinates[0]);
-  }, [shipment.coordinates, shipment.id, updateShipmentLocation]);
-
-  const updateTruck = useCallback(() => {
-    updateShipmentLocation(shipment.id, shipment.coordinates[coordinateIndex]);
-    setCoordinateIndex(coordinateIndex + 1);
-  }, [
-    coordinateIndex,
-    shipment.coordinates,
-    shipment.id,
-    updateShipmentLocation,
-  ]);
-
-  const driveCoordinate = useCallback(
-    () => () =>
-      coordinateIndex > shipment.coordinates.length - 1
-        ? resetTruck()
-        : updateTruck(),
-    [coordinateIndex, resetTruck, shipment.coordinates.length, updateTruck],
-  );
-
-  useEffect(() => {
-    const timeout = setInterval(driveCoordinate(), 500);
-    return () => clearInterval(timeout);
-  }, [
-    driveCoordinate,
-    shipment.coordinates,
-    shipment.id,
-    updateShipmentLocation,
-  ]);
-
   return (
     <StyledMap
       ref={mapRef}
@@ -84,7 +49,7 @@ export const Map: FC<{shipment: Shipment}> = ({shipment}) => {
       }}
       customMapStyle={mapStyle}>
       <LocationMarker coordinate={shipment.destination} />
-      <TruckMarker coordinate={shipment.location} />
+      <TruckMarker shipment={shipment} />
       <Route origin={shipment.location} destination={shipment.destination} />
     </StyledMap>
   );
