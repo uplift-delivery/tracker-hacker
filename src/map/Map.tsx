@@ -18,14 +18,13 @@ export const Map: FC<{shipment: Shipment}> = ({shipment}) => {
     if (i > shipment.coordinates.length - 1) {
       i = 0;
     }
-    console.log(shipment.coordinates[i]);
     updateShipmentLocation(shipment.id, shipment.coordinates[i]);
     i++;
   };
 
   useEffect(() => {
     let i = 0;
-    const timeout = setInterval(driveCoordinate(i), 1000); // 1000 milliseconds = 1 second
+    const timeout = setInterval(driveCoordinate(i), 500);
     return () => clearInterval(timeout);
   }, []);
 
