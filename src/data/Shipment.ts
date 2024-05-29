@@ -8,9 +8,9 @@ export interface Shipment {
   location: LatLng;
   origin: LatLng;
   destination: LatLng;
+  coordinates: LatLng[];
   deliveryDate: DateTime;
   status: ShipmentStatus;
-  coordinates: LatLng[];
   sender: string;
 }
 

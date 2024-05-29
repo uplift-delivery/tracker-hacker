@@ -1,7 +1,8 @@
 import React, {FC, forwardRef} from 'react';
-import {LatLng, Marker} from 'react-native-maps';
+import {Marker} from 'react-native-maps';
 import {Circle} from '@tamagui/lucide-icons';
 import {styled} from 'tamagui';
+import {MapMarkerProps} from 'react-native-maps/lib/MapMarker';
 
 const LocationIcon = styled(
   forwardRef((props: any, _: any) => <Circle {...props} />),
@@ -12,16 +13,8 @@ const LocationIcon = styled(
   },
 );
 
-interface LocationMarkerProps {
-  location: LatLng;
-}
-
-export const LocationMarker: FC<LocationMarkerProps> = ({location}) => (
-  <Marker
-    coordinate={location}
-    flat={true}
-    tappable={false}
-    anchor={{x: 0.5, y: 0.5}}>
+export const LocationMarker: FC<MapMarkerProps> = props => (
+  <Marker flat={true} tappable={false} anchor={{x: 0.5, y: 0.5}} {...props}>
     <LocationIcon />
   </Marker>
 );

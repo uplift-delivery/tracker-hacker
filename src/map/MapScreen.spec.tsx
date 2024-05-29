@@ -26,6 +26,7 @@ describe('MapsScreen', () => {
 
   const setupTest = () => {
     const shipment: Shipment = {
+      coordinates: [],
       id: '',
       weight: 4,
       trackingNumber: 'a123a123',
@@ -47,7 +48,11 @@ describe('MapsScreen', () => {
 
     return renderWithNavigator(
       <ShipmentContext.Provider
-        value={{shipments: [shipment], setShipments: jest.fn()}}>
+        value={{
+          shipments: [shipment],
+          setShipments: jest.fn(),
+          updateShipmentLocation: jest.fn(),
+        }}>
         <MapScreen />
       </ShipmentContext.Provider>,
       history,

@@ -1,11 +1,13 @@
 import React, {createContext, FC, PropsWithChildren, useState} from 'react';
 import {Shipment} from './Shipment.ts';
 import {shipmentData} from './shipments.ts';
-import {LatLng} from "react-native-maps";
+import {LatLng} from 'react-native-maps';
 
 interface ShipmentContextValue {
   shipments: Shipment[];
+
   setShipments(packages: Shipment[]): void;
+
   updateShipmentLocation(shipmentId: string, location: LatLng): void;
 }
 

@@ -11,10 +11,7 @@ export const shipmentData: Shipment[] = [
     id: '123',
     trackingNumber: 'a123a123',
     weight: 10,
-    location: {
-      latitude: 41.57814031843112,
-      longitude: -93.62448128817068,
-    },
+    location: desMoinesToDesMoines[0],
     origin: someFedExLocation,
     destination: uplift,
     coordinates: desMoinesToDesMoines,
@@ -26,10 +23,7 @@ export const shipmentData: Shipment[] = [
     id: '456',
     trackingNumber: 'b456b456',
     weight: 5,
-    location: {
-      latitude: 41.86467002155117,
-      longitude: -87.79921520186859,
-    },
+    location: chicagoToDesMoines[0],
     origin: {
       latitude: 41.86467002155117,
       longitude: -87.79921520186859,

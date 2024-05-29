@@ -28,6 +28,7 @@ jest.mock('react-native-maps', () => {
 
 // Routes
 jest.mock('react-native-maps-routes', () => {
+  const React = require('react');
   const {View} = require('tamagui');
   const MockView = (props: any) => <View>{props.children}</View>;
 

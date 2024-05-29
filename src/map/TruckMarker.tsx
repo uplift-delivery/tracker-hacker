@@ -1,7 +1,8 @@
 import React, {FC, forwardRef} from 'react';
-import {LatLng, Marker} from 'react-native-maps';
+import {Marker} from 'react-native-maps';
 import {Truck} from '@tamagui/lucide-icons';
 import {styled} from 'tamagui';
+import {MapMarkerProps} from 'react-native-maps/lib/MapMarker';
 
 const TruckLocationIcon = styled(
   forwardRef((props: any, _: any) => <Truck {...props} />),
@@ -11,17 +12,13 @@ const TruckLocationIcon = styled(
   },
 );
 
-interface TruckMarkerProps {
-  location: LatLng;
-}
-
-export const TruckMarker: FC<TruckMarkerProps> = ({location}) => (
+export const TruckMarker: FC<MapMarkerProps> = props => (
   <Marker
-    coordinate={location}
     flat={true}
     tappable={false}
     anchor={{x: 0.5, y: 0.5}}
-    zIndex={2}>
+    zIndex={2}
+    {...props}>
     <TruckLocationIcon />
   </Marker>
 );
