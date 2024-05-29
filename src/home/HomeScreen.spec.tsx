@@ -1,6 +1,7 @@
 import React from 'react';
 import {HomeScreen} from './HomeScreen.tsx';
 import {
+  defaultValue,
   Shipment,
   ShipmentContext,
   ShipmentStatus,
@@ -32,14 +33,9 @@ describe('HomeScreen', () => {
     expect(packages.length).toBe(3);
   });
 
-  const setupTest = (packages: Shipment[]) =>
+  const setupTest = (shipments: Shipment[] = []) =>
     renderWithNavigator(
-      <ShipmentContext.Provider
-        value={{
-          shipments: packages,
-          setShipments: jest.fn(),
-          updateShipmentLocation: jest.fn(),
-        }}>
+      <ShipmentContext.Provider value={{...defaultValue, shipments}}>
         <HomeScreen />
       </ShipmentContext.Provider>,
     );

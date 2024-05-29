@@ -5,6 +5,7 @@ import {fireEvent, screen} from '@testing-library/react-native';
 import {InitialState} from '@react-navigation/routers';
 import {Routes} from '../navigation';
 import {
+  defaultValue,
   Shipment,
   ShipmentContext,
   ShipmentStatus,
@@ -48,11 +49,7 @@ describe('MapsScreen', () => {
 
     return renderWithNavigator(
       <ShipmentContext.Provider
-        value={{
-          shipments: [shipment],
-          setShipments: jest.fn(),
-          updateShipmentLocation: jest.fn(),
-        }}>
+        value={{...defaultValue, shipments: [shipment]}}>
         <MapScreen />
       </ShipmentContext.Provider>,
       history,

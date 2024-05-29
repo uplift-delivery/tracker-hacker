@@ -1,7 +1,7 @@
 import {styled} from 'tamagui';
 import MapView, {PROVIDER_GOOGLE} from 'react-native-maps';
 import React, {FC, useCallback, useRef} from 'react';
-import {Shipment} from '../data';
+import {Shipment, ShipmentStatus} from '../data';
 import {mapStyle} from './map-style.ts';
 import {LocationMarker} from './LocationMarker.tsx';
 import {TruckMarker} from './TruckMarker.tsx';
@@ -42,7 +42,11 @@ export const Map: FC<{shipment: Shipment}> = ({shipment}) => {
       }}
       customMapStyle={mapStyle}>
       <LocationMarker coordinate={shipment.destination} />
-      <TruckMarker shipment={shipment} />
+
+      {shipment.status !== ShipmentStatus.DELIVERED && (
+        <TruckMarker shipment={shipment} />
+      )}
+
       <Route origin={shipment.location} destination={shipment.destination} />
     </StyledMap>
   );

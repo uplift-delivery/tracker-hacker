@@ -66,7 +66,8 @@ export const TruckMarker: FC<TruckMarkerProps> = ({shipment}) => {
       flat={true}
       tappable={false}
       anchor={{x: 0.5, y: 0.5}}
-      zIndex={2}>
+      zIndex={2}
+      aria-label="truck marker">
       <TruckLocationIcon />
     </Marker>
   );
