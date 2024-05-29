@@ -1,14 +1,7 @@
 import {styled} from 'tamagui';
 import MapView, {PROVIDER_GOOGLE} from 'react-native-maps';
-import React, {
-  FC,
-  useCallback,
-  useContext,
-  useEffect,
-  useRef,
-  useState,
-} from 'react';
-import {Shipment, ShipmentContext} from '../data';
+import React, {FC, useCallback, useRef} from 'react';
+import {Shipment} from '../data';
 import {mapStyle} from './map-style.ts';
 import {LocationMarker} from './LocationMarker.tsx';
 import {TruckMarker} from './TruckMarker.tsx';
