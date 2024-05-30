@@ -11,7 +11,12 @@ const StyledMap = styled(MapView, {
   flex: 1,
 });
 
-export const Map: FC<{shipment: Shipment}> = ({shipment}) => {
+interface MapProps {
+  shipment: Shipment;
+  delay: boolean;
+}
+
+export const Map: FC<MapProps> = ({shipment, delay}) => {
   const mapRef = useRef<MapView>(null);
 
   const setZoomLevel = useCallback(() => {
@@ -44,7 +49,7 @@ export const Map: FC<{shipment: Shipment}> = ({shipment}) => {
       <LocationMarker coordinate={shipment.destination} />
 
       {shipment.status !== ShipmentStatus.DELIVERED && (
-        <TruckMarker shipment={shipment} />
+        <TruckMarker shipment={shipment} delay={delay} />
       )}
 
       <Route origin={shipment.location} destination={shipment.destination} />

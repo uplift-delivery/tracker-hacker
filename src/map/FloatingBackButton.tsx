@@ -12,8 +12,10 @@ const BackButton = styled(Button, {
   left: '$3',
   zIndex: '$1',
   borderRadius: '$8',
+  borderColor: '#C4C4C4',
   color: '$accentColor',
-  background: '$background',
+  backgroundColor: '$background',
+  elevation: 2,
   'aria-label': 'navigate back',
 });
 

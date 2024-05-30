@@ -20,3 +20,5 @@ export enum ShipmentStatus {
   OUT_FOR_DELIVERY = 'Out For Delivery',
   DELIVERED = 'Delivered',
 }
+
+export const DELIVERY_DELAY_THRESHOLD = 30;

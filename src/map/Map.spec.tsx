@@ -20,7 +20,10 @@ describe('Map', () => {
     expect(truckMarker).toBeNull();
   });
 
-  const setupTest = (shipmentProps: Partial<Shipment> = {}) => {
+  const setupTest = (
+    shipmentProps: Partial<Shipment> = {},
+    delay: boolean = false,
+  ) => {
     const shipment: Shipment = {
       coordinates: [],
       id: '',
@@ -35,6 +38,6 @@ describe('Map', () => {
       ...shipmentProps,
     };
 
-    return renderWithNavigator(<Map shipment={shipment} />);
+    return renderWithNavigator(<Map shipment={shipment} delay={delay} />);
   };
 });

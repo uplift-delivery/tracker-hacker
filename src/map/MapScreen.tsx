@@ -1,5 +1,5 @@
 import React, {FC, useContext, useMemo} from 'react';
-import {ShipmentContext} from '../data';
+import {DELIVERY_DELAY_THRESHOLD, Severity, ShipmentContext} from '../data';
 import {FloatingBackButton} from './FloatingBackButton.tsx';
 import {FullscreenLayout} from '../layout';
 import {RouteProp, useRoute} from '@react-navigation/native';
@@ -11,7 +11,19 @@ export const MapScreen: FC = () => {
     params: {shipmentId},
   } = useRoute<RouteProp<RootStackParamList, Routes.Map>>();
 
-  const {shipments} = useContext(ShipmentContext);
+  const {shipments, volume, traffic, weather} = useContext(ShipmentContext);
+
+  const delay = useMemo(
+    () =>
+      [volume, traffic, weather].reduce((prev, curr) => {
+        if (curr === Severity.HEAVY) {
+          return prev + 30;
+        }
+
+        return curr === Severity.MEDIUM ? prev + 10 : prev;
+      }, 0),
+    [traffic, volume, weather],
+  );
 
   const shipment = useMemo(
     () => shipments.find(s => s.id === shipmentId),
@@ -21,7 +33,9 @@ export const MapScreen: FC = () => {
   return (
     <FullscreenLayout aria-label="Map Screen">
       <FloatingBackButton />
-      {shipment && <Map shipment={shipment} />}
+      {shipment && (
+        <Map shipment={shipment} delay={delay >= DELIVERY_DELAY_THRESHOLD} />
+      )}
     </FullscreenLayout>
   );
 };

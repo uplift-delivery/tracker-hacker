@@ -80,6 +80,16 @@ describe('PreciseDeliveryEstimate', () => {
     expect(diff).toHaveStyle({color: tokensPlus.color.delayed.val});
   });
 
+  test('does not show values less than 0', () => {
+    const now = DateTime.utc(2024, 5, 3, 15, 0);
+    Settings.now = () => now.toMillis();
+
+    setupTest(DateTime.utc(2024, 5, 3, 14, 30), 30);
+
+    const diff = screen.getByLabelText('date diff');
+    expect(diff).toHaveTextContent('0 minutes away');
+  });
+
   test('updates time every 60 seconds', async () => {
     jest.useFakeTimers();
     const now = DateTime.utc(2024, 5, 3, 14, 0);

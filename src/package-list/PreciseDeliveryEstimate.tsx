@@ -2,6 +2,7 @@ import {DateTime} from 'luxon';
 import React, {FC, useCallback, useEffect, useMemo, useState} from 'react';
 import {getTokens, ListItem, Text, XGroup} from 'tamagui';
 import {Circle} from '@tamagui/lucide-icons';
+import {DELIVERY_DELAY_THRESHOLD} from '../data';
 
 interface PreciseDeliveryEstimateProps {
   deliveryDate: DateTime;
@@ -18,16 +19,17 @@ export const PreciseDeliveryEstimate: FC<PreciseDeliveryEstimateProps> = ({
   } = getTokens();
 
   const color = useMemo(
-    () => (delay > 0 ? delayed : onTime),
+    () => (delay >= DELIVERY_DELAY_THRESHOLD ? delayed : onTime),
     [delay, delayed, onTime],
   );
 
   const calculateDiff = useCallback(() => {
     const datePlusDelay = deliveryDate.plus({minute: delay});
     const duration = datePlusDelay.diffNow(['hours', 'minutes']);
-    const difference = Math.round(duration.hours || duration.minutes);
+    const rounded = Math.round(duration.hours || duration.minutes);
+    const difference = Math.max(rounded, 0);
     const unit = duration.hours > 0 ? 'hour' : 'minute';
-    const plural = difference > 1 ? 's' : '';
+    const plural = difference === 1 ? '' : 's';
 
     setDiff(`${difference} ${unit}${plural}`);
   }, [delay, deliveryDate]);

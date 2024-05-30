@@ -1,5 +1,11 @@
-import React, {FC, useCallback, useMemo} from 'react';
-import {Shipment, ShipmentStatus} from '../data';
+import React, {FC, useCallback, useContext, useMemo} from 'react';
+import {
+  DELIVERY_DELAY_THRESHOLD,
+  Severity,
+  Shipment,
+  ShipmentContext,
+  ShipmentStatus,
+} from '../data';
 import {ListItem, styled, XGroup} from 'tamagui';
 import {ShipmentIcon} from './ShipmentIcon.tsx';
 import {useNavigation} from '@react-navigation/native';
@@ -27,6 +33,19 @@ interface ShipmentListItemProps {
 
 export const ShipmentListItem: FC<ShipmentListItemProps> = ({shipment}) => {
   const {navigate} = useNavigation<NavigationProps>();
+  const {volume, traffic, weather} = useContext(ShipmentContext);
+
+  const delay = useMemo(
+    () =>
+      [volume, traffic, weather].reduce((prev, curr) => {
+        if (curr === Severity.HEAVY) {
+          return prev + 30;
+        }
+
+        return curr === Severity.MEDIUM ? prev + 10 : prev;
+      }, 0),
+    [traffic, volume, weather],
+  );
 
   const delivered = useMemo(
     () => shipment.status === ShipmentStatus.DELIVERED,
@@ -55,7 +74,7 @@ export const ShipmentListItem: FC<ShipmentListItemProps> = ({shipment}) => {
       <ShipmentStatusDescription label={shipment.status.toUpperCase()}>
         {outForDelivery && (
           <XGroup.Item>
-            <DeliveryStatusChip delayed={false} />
+            <DeliveryStatusChip delayed={delay >= DELIVERY_DELAY_THRESHOLD} />
           </XGroup.Item>
         )}
       </ShipmentStatusDescription>
@@ -69,7 +88,7 @@ export const ShipmentListItem: FC<ShipmentListItemProps> = ({shipment}) => {
       {outForDelivery && (
         <PreciseDeliveryEstimate
           deliveryDate={shipment.deliveryDate}
-          delay={0}
+          delay={delay}
         />
       )}
     </StyledListItem>

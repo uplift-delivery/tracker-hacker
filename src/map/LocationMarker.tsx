@@ -9,12 +9,12 @@ const LocationIcon = styled(
   {
     fill: 'dodgerblue',
     color: '$brand',
-    size: '$0.75',
+    size: 15,
   },
 );
 
 export const LocationMarker: FC<MapMarkerProps> = props => (
-  <Marker flat={true} tappable={false} anchor={{x: 0.5, y: 0.5}} {...props}>
+  <Marker flat={true} tappable={false} anchor={{x: 0.5, y: 0.75}} {...props}>
     <LocationIcon />
   </Marker>
 );

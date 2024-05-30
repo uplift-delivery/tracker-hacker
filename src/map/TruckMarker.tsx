@@ -15,15 +15,16 @@ const TruckLocationIcon = styled(
   forwardRef((props: any, _: any) => <Truck {...props} />),
   {
     fill: 'white',
-    color: 'royalblue',
+    'aria-label': 'truck icon',
   },
 );
 
 interface TruckMarkerProps {
   shipment: Shipment;
+  delay: boolean;
 }
 
-export const TruckMarker: FC<TruckMarkerProps> = ({shipment}) => {
+export const TruckMarker: FC<TruckMarkerProps> = ({shipment, delay}) => {
   const {updateShipmentLocation} = useContext(ShipmentContext);
   const [coordinateIndex, setCoordinateIndex] = useState(0);
 
@@ -51,7 +52,7 @@ export const TruckMarker: FC<TruckMarkerProps> = ({shipment}) => {
   );
 
   useEffect(() => {
-    const timeout = setInterval(driveCoordinate(), 500);
+    const timeout = setInterval(driveCoordinate(), 1500);
     return () => clearInterval(timeout);
   }, [
     driveCoordinate,
@@ -68,7 +69,7 @@ export const TruckMarker: FC<TruckMarkerProps> = ({shipment}) => {
       anchor={{x: 0.5, y: 0.5}}
       zIndex={2}
       aria-label="truck marker">
-      <TruckLocationIcon />
+      <TruckLocationIcon color={delay ? '$delayed' : '$onTime'} />
     </Marker>
   );
 };
