@@ -13,7 +13,7 @@ export const Route: FC<RouteProps> = ({origin, destination}) => (
     origin={origin}
     destination={destination}
     apiKey={getConfigOrDefault(ConfigKey.MAP_API_KEY)}
-    strokeColor="dodgerblue"
+    strokeColor="$brand"
     strokeWidth={4}
     mode="DRIVE"
   />

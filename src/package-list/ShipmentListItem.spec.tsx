@@ -10,6 +10,7 @@ describe('ShipmentListItem', () => {
 
   beforeEach(() => {
     shipmentExample = {
+      coordinates: [],
       id: '123',
       trackingNumber: 'a123a123',
       weight: 2,
@@ -36,26 +37,6 @@ describe('ShipmentListItem', () => {
     setupTest({...shipmentExample, trackingNumber});
 
     expect(screen.queryByText(trackingNumber, {exact: false})).toBeVisible();
-  });
-
-  test('shows estimated delivery date', () => {
-    const deliveryDate = DateTime.utc(2024, 5, 3);
-    const status = ShipmentStatus.IN_TRANSIT;
-
-    setupTest({...shipmentExample, deliveryDate, status});
-
-    expect(
-      screen.queryByText('Estimated Delivery Date: 5/3/2024'),
-    ).toBeVisible();
-  });
-
-  test('shows delivery date', () => {
-    const deliveryDate = DateTime.utc(2024, 5, 3);
-    const status = ShipmentStatus.DELIVERED;
-
-    setupTest({...shipmentExample, deliveryDate, status});
-
-    expect(screen.queryByText('Delivery Date: 5/3/2024')).toBeVisible();
   });
 
   test('shows status', () => {
@@ -92,6 +73,38 @@ describe('ShipmentListItem', () => {
     fireEvent.press(screen.getByLabelText('shipment'));
 
     expect(screen.queryByLabelText('Map Screen')).toBeVisible();
+  });
+
+  test('hides delivery chip given shipment is not out for delivery', () => {
+    setupTest({...shipmentExample, status: ShipmentStatus.DELIVERED});
+    expect(screen.queryByLabelText('on time chip')).toBeNull();
+  });
+
+  test('shows delivery chip given shipment is out for delivery', () => {
+    setupTest({...shipmentExample, status: ShipmentStatus.OUT_FOR_DELIVERY});
+    expect(screen.queryByLabelText('on time chip')).toBeVisible();
+  });
+
+  test('shows delivery date given shipment is not out for delivery', () => {
+    setupTest({...shipmentExample, status: ShipmentStatus.DELIVERED});
+    expect(screen.queryByLabelText('delivery date')).toBeVisible();
+    expect(screen.queryByLabelText('delivery date time')).toBeNull();
+  });
+
+  test('shows delivery date time given shipment is out for delivery', () => {
+    setupTest({...shipmentExample, status: ShipmentStatus.OUT_FOR_DELIVERY});
+    expect(screen.queryByLabelText('delivery date')).toBeNull();
+    expect(screen.queryByLabelText('delivery date time')).toBeVisible();
+  });
+
+  test('hides precise delivery estimate given shipment is not out for delivery', () => {
+    setupTest({...shipmentExample, status: ShipmentStatus.DELIVERED});
+    expect(screen.queryByLabelText('date diff')).toBeNull();
+  });
+
+  test('shows precise delivery estimate given shipment is out for delivery', () => {
+    setupTest({...shipmentExample, status: ShipmentStatus.OUT_FOR_DELIVERY});
+    expect(screen.queryByLabelText('date diff')).toBeVisible();
   });
 
   const setupTest = (shipment: Shipment) =>

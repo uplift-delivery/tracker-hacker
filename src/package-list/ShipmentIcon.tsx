@@ -5,17 +5,19 @@ import {Package, PackageCheck} from '@tamagui/lucide-icons';
 const DeliveredIcon = styled(
   forwardRef((props: any, _: any) => <PackageCheck {...props} />),
   {
+    alignSelf: 'flex-start',
     size: '$2',
-    color: 'mediumseagreen',
+    color: '$onTime',
     'aria-label': 'delivered icon',
   },
 );
 
-const ShippedIcon = styled(
+export const ShippedIcon = styled(
   forwardRef((props: any, _: any) => <Package {...props} />),
   {
+    alignSelf: 'flex-start',
     size: '$2',
-    color: 'dodgerblue',
+    color: '$brand',
     'aria-label': 'shipped icon',
   },
 );

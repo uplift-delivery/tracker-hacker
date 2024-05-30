@@ -1,6 +1,6 @@
 import React, {FC, useContext} from 'react';
 import {ShipmentContext} from '../data';
-import {ShipmentList} from './ShipmentList.tsx';
+import {ShipmentList} from '../package-list';
 import {Header, Layout} from '../layout';
 
 export const HomeScreen: FC = () => {
@@ -8,7 +8,7 @@ export const HomeScreen: FC = () => {
 
   return (
     <Layout aria-label="Home Screen">
-      <Header>Your Shipments</Header>
+      <Header>My Packages</Header>
       <ShipmentList shipments={shipments} />
     </Layout>
   );

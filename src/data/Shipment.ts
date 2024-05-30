@@ -15,7 +15,7 @@ export interface Shipment {
 }
 
 export enum ShipmentStatus {
-  NOT_SHIPPED = 'Not Shipped',
+  LABEL_CREATED = 'Label Created',
   IN_TRANSIT = 'In Transit',
   OUT_FOR_DELIVERY = 'Out For Delivery',
   DELIVERED = 'Delivered',

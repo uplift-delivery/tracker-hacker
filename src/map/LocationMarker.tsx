@@ -8,7 +8,7 @@ const LocationIcon = styled(
   forwardRef((props: any, _: any) => <Circle {...props} />),
   {
     fill: 'dodgerblue',
-    color: 'dodgerblue',
+    color: '$brand',
     size: '$0.75',
   },
 );

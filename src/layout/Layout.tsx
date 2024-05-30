@@ -11,8 +11,8 @@ const LayoutSafeArea = styled(SafeAreaView, {
 
 const LayoutContainer = styled(View, {
   flex: 1,
-  paddingTop: '$4',
-  paddingBottom: '$4',
+  paddingVertical: '$4',
+  paddingHorizontal: '$4',
 });
 
 export const Layout: FC<PropsWithChildren<SafeAreaViewProps>> = ({
