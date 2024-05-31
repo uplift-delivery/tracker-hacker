@@ -1,12 +1,12 @@
 import React, {FC, PropsWithChildren, useCallback, useState} from 'react';
-import {styled, View} from 'tamagui';
+import {ScrollView, styled, View} from 'tamagui';
 import {SafeAreaView} from 'react-native-safe-area-context';
 import {SafeAreaViewProps} from 'react-native-safe-area-context/src/SafeAreaView.tsx';
 import {DevMenu} from '../dev-menu/DevMenu.tsx';
 
 const LayoutSafeArea = styled(SafeAreaView, {
   flex: 1,
-  backgroundColor: '$background',
+  backgroundColor: '#FAFAFA',
 });
 
 const LayoutContainer = styled(View, {
@@ -24,11 +24,11 @@ export const Layout: FC<PropsWithChildren<SafeAreaViewProps>> = ({
 
   return (
     <LayoutSafeArea {...props}>
-      <LayoutContainer onLongPress={openDevMenu}>
-        {children}
+      <ScrollView>
+        <LayoutContainer onLongPress={openDevMenu}>{children}</LayoutContainer>
+      </ScrollView>
 
-        <DevMenu open={devMenuOpen} setOpen={setDevMenuOpen} />
-      </LayoutContainer>
+      <DevMenu open={devMenuOpen} setOpen={setDevMenuOpen} />
     </LayoutSafeArea>
   );
 };

@@ -15,7 +15,7 @@ export const DevMenu: FC<DevMenuProps> = ({open, setOpen}) => {
 
   return (
     <BottomMenu open={open} onOpenChange={setOpen}>
-      <Text fontSize={16}>Dev Chaos Menu</Text>
+      <Text fontSize={18}>Dev Chaos Menu</Text>
       <SeverityToggle id="volume" value={volume} setValue={setVolume} />
       <SeverityToggle id="traffic" value={traffic} setValue={setTraffic} />
       <SeverityToggle id="weather" value={weather} setValue={setWeather} />

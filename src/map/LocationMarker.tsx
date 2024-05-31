@@ -7,7 +7,7 @@ import {MapMarkerProps} from 'react-native-maps/lib/MapMarker';
 const LocationIcon = styled(
   forwardRef((props: any, _: any) => <Circle {...props} />),
   {
-    fill: 'dodgerblue',
+    fill: '#4D148C',
     color: '$brand',
     size: 15,
   },

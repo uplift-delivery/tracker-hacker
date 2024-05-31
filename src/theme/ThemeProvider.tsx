@@ -10,7 +10,7 @@ export const tokensPlus = createTokens({
     ...color,
     onTime: '#008A00',
     delayed: '#DE002E',
-    brand: 'dodgerblue',
+    brand: '#4D148C',
   },
   ...restTokens,
 });

@@ -13,7 +13,7 @@ const Toggle = styled(ToggleGroup, {
   orientation: 'horizontal',
   size: '$4',
   disableDeactivation: true,
-  theme: 'blue',
+  theme: 'purple',
 });
 
 const ToggleText = styled(Text, {

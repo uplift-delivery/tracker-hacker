@@ -19,8 +19,8 @@ import {DeliveryDate} from './delivery-date/DeliveryDate.tsx';
 
 export const StyledListItem = styled(ListItem, {
   size: '$5',
-  padding: '$4',
-  backgroundColor: '$background0',
+  padding: '$3.5',
+  backgroundColor: '#fff',
   borderBottomWidth: 1,
   borderBottomColor: '$color18',
   'aria-label': 'shipment',
